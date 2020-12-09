@@ -1,0 +1,67 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+{% if form != None %}
+
+<h2>{{ title }}.</h2>
+
+<br /><h3>Оставь свой отзыв</h3>
+<div class="jumbotron">
+    <form method="post">
+        {% csrf_token %}
+        <label id="t1" for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label>
+        {{ form.name }}<br />
+        <label for="{{ form.auto.id_for_label }}">{{ form.auto.label }}:</label>
+        {{ form.auto }}<br />
+        <label for="{{ form.service.id_for_label }}">{{ form.service.label }}:</label>
+        {{ form.service }}<br />
+        <label for="{{ form.feedback.id_for_label }}">{{ form.feedback.label }}:</label>
+        {{ form.feedback }}<br />
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+        {{ form.email }}<br />
+        <label for="{{ form.repeat.id_for_label }}">{{ form.repeat.label }}:</label>
+        {{ form.repeat }}<br />
+        <label for="{{ form.consent.id_for_label }}">{{ form.consent.label }}:</label>
+        {{ form.consent }}<br />
+        <input id="b1" type="submit" value="Отправить" />
+    </form>
+    
+</div>
+    <script>
+        function b1_colorin(){$('#b1').css('color', '#000000');}
+        function b1_colorout(){$('#b1').css('color', 'black');}
+        $('#b1').mouseover(b1_colorin);
+        $('#b1').mouseout(b1_colorout);
+    </script>
+    <script>
+        function textclick(){$('#id_name').css('background-color', '#ff8b75');}
+        function textclickoff(){$('#id_name').css('background-color', 'white');}
+        $('#id_name').focus(textclick);
+        $('#id_name').blur(textclickoff);
+    </script>
+    <script>
+        function textclick(){$('#id_email').css('background-color', '#ff8b75');}
+        function textclickoff(){$('#id_email').css('background-color', 'white');}
+        $('#id_email').focus(textclick);
+        $('#id_email').blur(textclickoff);
+    </script>
+    <script>
+        function textclick(){$('#id_auto').css('background-color', '#ff8b75');}
+        function textclickoff(){$('#id_auto').css('background-color', 'white');}
+        $('#id_auto').focus(textclick);
+        $('#id_auto').blur(textclickoff);
+    </script>
+{% else %}
+<br /><h2>Спасибо за ваш отзыв</h2>
+<h3>Убедитесь в том, что все написано правильно:</h3>
+<ul>
+    <li><span>Ваше имя: </span>{{ data.name }}</li>
+    <li><span>Ваш автомобиль: </span>{{ data.auto }}</li>
+    <li><span>Качество работы:</span>{{ data.service }}</li>
+    <li><span>Ваш отзыв о нас: </span>{{ data.feedback }}</li>
+    <li><span>Вернетесь ли вы: </span>{{ data.repeat }}</li>
+    <li><span>Ваш e-mail: </span>{{ data.email }}</li>
+    <li><span>Я согласен на отправление моего отзыва: </span>{{ data.consent }}</li>
+</ul>
+{% endif %}
+{% endblock %}
